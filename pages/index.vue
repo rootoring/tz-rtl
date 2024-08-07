@@ -57,8 +57,7 @@ const onDrop = (evt: DragEvent, list: number) => {
     if (!itemID) return;
     const item = store.tasks.find((item) => item.id === Number(itemID));
     if (!item) return;
-    const check = store.tasks.find((item) => item.categoryId == list);
-    if (item.categoryId === list) return;
+    const check = store.tasks.find((i) => i.categoryId == list);
     if (check) {
       if (item.type === check.type) {
         check.count += item.count;
@@ -67,13 +66,14 @@ const onDrop = (evt: DragEvent, list: number) => {
           store.tasks.findIndex((i) => i.id == item.id),
           1
         );
+        localStorage.setItem("Tasks", JSON.stringify(store.tasks));
       }
+
       return;
     }
     item.categoryId = list;
     localStorage.setItem("Tasks", JSON.stringify(store.tasks));
   }
-
 };
 const changeCardStatus = (task: taskType) => {
   store.task.data = JSON.parse(JSON.stringify(task));
