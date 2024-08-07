@@ -71,8 +71,9 @@ const onDrop = (evt: DragEvent, list: number) => {
       return;
     }
     item.categoryId = list;
+    localStorage.setItem("Tasks", JSON.stringify(store.tasks));
   }
-  localStorage.setItem("Tasks", JSON.stringify(store.tasks));
+
 };
 const changeCardStatus = (task: taskType) => {
   store.task.data = JSON.parse(JSON.stringify(task));
